@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reabb's Lua Scripts | Premium Lua Scripting Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #00e1ff;
+            --accent2: #7f5cff;
+            --card-bg: #181f2f;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #7f5cff 100%);
+            min-height: 100vh;
+            color: var(--text);
+        }
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0; bottom: 0;
+            width: 80px;
+            background: var(--secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 0;
+            z-index: 10;
+            box-shadow: 2px 0 16px #0004;
+        }
+        .sidebar nav {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .sidebar a {
+            color: var(--accent);
+            font-size: 1.7rem;
+            text-decoration: none;
+            transition: color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            color: var(--accent2);
+            transform: scale(1.2);
+        }
+        main {
+            margin-left: 100px;
+            padding: 0 0 48px 0;
+        }
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            background: linear-gradient(120deg, #181f2f 60%, #00e1ff22 100%);
+            border-radius: 0 0 32px 32px;
+            box-shadow: 0 8px 32px #00e1ff22;
+            margin-bottom: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 0.5em;
+            letter-spacing: 1px;
+        }
+        .hero p {
+            color: var(--muted);
+            font-size: 1.2rem;
+            max-width: 480px;
+            margin: 0 auto 1.5em auto;
+        }
+        .hero .cta-btn {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 16px var(--accent2);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .hero .cta-btn:hover {
+            background: linear-gradient(90deg, var(--accent2), var(--accent));
+            transform: scale(1.05);
+        }
+        .section-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2rem;
+            color: var(--accent2);
+            margin: 48px 0 24px 0;
+            text-align: center;
+        }
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .script-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #00e1ff22;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .script-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 48px var(--accent2);
+        }
+        .script-card h3 {
+            margin: 0 0 8px 0;
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+        .script-card p {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 18px;
+        }
+        .script-card .price {
+            color: var(--accent2);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+        .script-card .buy-btn {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 22px;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 2px 8px var(--accent2);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .script-card .buy-btn:hover {
+            background: linear-gradient(90deg, var(--accent2), var(--accent));
+            transform: scale(1.05);
+        }
+        .contact-section {
+            max-width: 500px;
+            margin: 64px auto 0 auto;
+            background: var(--card-bg);
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #00e1ff22;
+            padding: 40px 32px;
+        }
+        .contact-section h2 {
+            color: var(--accent2);
+            margin-top: 0;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 12px;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #222;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #23243a;
+            color: var(--text);
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border: 1.5px solid var(--accent2);
+            box-shadow: 0 0 8px var(--accent2);
+            outline: none;
+        }
+        .contact-form button {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--accent2);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .contact-form button:hover {
+            background: linear-gradient(90deg, var(--accent2), var(--accent));
+            transform: scale(1.05);
+        }
+        .contact-section .alt {
+            color: var(--muted);
+            margin-top: 1em;
+            font-size: 0.98em;
+        }
+        footer {
+            text-align: center;
+            padding: 24px 0 12px 0;
+            color: var(--muted);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-top: 48px;
+        }
+        @media (max-width: 900px) {
+            .sidebar { width: 60px; }
+            main { margin-left: 70px; }
+        }
+        @media (max-width: 600px) {
+            .sidebar { display: none; }
+            main { margin-left: 0; }
+            .hero { border-radius: 0 0 18px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <a href="#home" title="Home">🏠</a>
+            <a href="#scripts" title="Scripts">💻</a>
+            <a href="#contact" title="Contact">✉️</a>
+        </nav>
+    </div>
+    <main>
+        <section class="hero" id="home">
+            <h1>Reabb's Lua Scripts</h1>
+            <p>Unlock the power of automation and creativity with premium Lua scripts for Roblox, FiveM, and more. Fast delivery, secure code, and custom solutions for your projects.</p>
+            <button class="cta-btn" onclick="document.getElementById('scripts').scrollIntoView({behavior:'smooth'})">Browse Scripts</button>
+        </section>
+        <h2 class="section-title" id="scripts">Featured Scripts</h2>
+        <div class="scripts-grid">
+            <div class="script-card">
+                <h3>Roblox Anti-Cheat System</h3>
+                <p>Advanced anti-cheat for Roblox games. Easy to integrate, highly configurable, and lightweight.</p>
+                <div class="price">$9.99</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="script-card">
+                <h3>FiveM Vehicle Spawner</h3>
+                <p>Spawn any vehicle with custom options and permissions. Perfect for RP servers.</p>
+                <div class="price">$7.99</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="script-card">
+                <h3>Universal Admin Panel</h3>
+                <p>Powerful admin panel for Lua-based games. Ban, kick, manage users, and more.</p>
+                <div class="price">$12.99</div>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="script-card">
+                <h3>Custom Script Request</h3>
+                <p>Need something unique? Request a custom Lua script tailored for your needs.</p>
+                <div class="price">From $14.99</div>
+                <button class="buy-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request Now</button>
+            </div>
+        </div>
+        <section class="contact-section" id="contact">
+            <h2>Contact & Custom Orders</h2>
+            <form class="contact-form" autocomplete="off">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Describe your custom script or question..." required></textarea>
+                <button type="submit">Send Request</button>
+            </form>
+            <div class="alt">
+                Or email: <a href="mailto:example@gmail.com" style="color:var(--accent2)">example@gmail.com</a><br>
+                Discord: <b style="color:var(--accent)">wilsonlua#1234</b>
+            </div>
+        </section>
+        <footer>
+            &copy; 2025 Reabb's Lua Scripts. All rights reserved.
+        </footer>
+    </main>
+    <script>
+        // Sidebar nav active state
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.sidebar a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Contact form fake submit
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your request! We will contact you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

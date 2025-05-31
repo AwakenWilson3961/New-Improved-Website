@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilson | About Me 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4bb.png">
+</head>
+<body>
+    <canvas id="bubbles-bg"></canvas>
+    <button id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+    </button>
+    <input type="color" id="accent-picker" title="Pick accent color" style="position:fixed;top:110px;right:48px;width:44px;height:44px;border:none;z-index:301;box-shadow:0 0 12px var(--accent2);border-radius:50%;cursor:pointer;">
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Blog</a></li>
+            <li><a href="#services">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <section id="home" class="glass parallax">
+        <div class="profile-card">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Wilson's profile picture" class="profile-img">
+            <h1 class="typewriter"></h1>
+            <div class="social-links">
+                <a href="mailto:example@gmail.com" title="Email"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Gmail"></a>
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"></a>
+                <a href="https://github.com" target="_blank" title="GitHub"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub"></a>
+            </div>
+        </div>
+        <p class="intro">Currently pursuing a career in Accounting, I am passionate about applying analytical thinking and precision to help organizations make sound financial decisions and maintain regulatory compliance. My academic journey has provided me with a strong foundation in financial reporting, auditing, and data analysis, allowing me to approach financial challenges with accuracy.</p>
+    </section>  
+    <section id="about" class="glass parallax">
+        <h2>Blog</h2>
+        <p>5/28/2025</p>
+        <p>This is a blog post about my journey in accounting.</p>
+    </section> 
+    <section id="services" class="glass parallax">
+        <h2>Experience</h2>
+        <ul class="timeline">
+            <li>
+                <span>2024-2025</span>
+                <div>
+                    <strong>Accounting Intern</strong> at FutureFinance Inc.<br>
+                    <small>Worked on financial audits, data analysis, and reporting automation.</small>
+                </div>
+            </li>
+            <li>
+                <span>2023</span>
+                <div>
+                    <strong>Bachelor of Science in Accounting</strong><br>
+                    <small>University of Innovation</small>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section id="contact" class="glass parallax">
+        <h2>Contact me!</h2>
+        <form class="contact-form" autocomplete="off">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send ✉️</button>
+        </form>
+        <p style="margin-top:1em;">Or email: <a href="mailto:example@gmail.com">example@gmail.com</a></p>
+    </section>
+    <footer>
+        <p>&copy; 2025 Wilson. All rights reserved.</p>
+    </footer>
+    <!-- Futuristic animated SVG waves -->
+    <svg id="waves" style="position:fixed;bottom:0;left:0;width:100vw;height:120px;z-index:0;pointer-events:none;" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path id="wave1" d="M0,80 Q360,120 720,80 T1440,80 V120 H0Z" fill="url(#grad1)">
+            <animate attributeName="d" dur="6s" repeatCount="indefinite"
+                values="M0,80 Q360,120 720,80 T1440,80 V120 H0Z;
+                        M0,90 Q360,60 720,100 T1440,90 V120 H0Z;
+                        M0,80 Q360,120 720,80 T1440,80 V120 H0Z"/>
+        </path>
+        <defs>
+            <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#764ba2" stop-opacity="0.7"/>
+                <stop offset="1" stop-color="#667eea" stop-opacity="0.3"/>
+            </linearGradient>
+        </defs>
+    </svg>
+    <script>
+        // Bubbles background (already present, slightly enhanced)
+        const canvas = document.getElementById('bubbles-bg');
+        const ctx = canvas.getContext('2d');
+        let bubbles = [];
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        function randomBetween(a, b) {
+            return a + Math.random() * (b - a);
+        }
+        for (let i = 0; i < 48; i++) {
+            bubbles.push({
+                x: randomBetween(0, canvas.width),
+                y: randomBetween(0, canvas.height),
+                r: randomBetween(10, 38),
+                speed: randomBetween(0.5, 2.2),
+                dx: randomBetween(-0.6, 0.6),
+                color: `rgba(${Math.floor(randomBetween(120,180))},${Math.floor(randomBetween(120,180))},255,0.15)`
+            });
+        }
+        function drawBubbles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let b of bubbles) {
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+                ctx.fillStyle = b.color;
+                ctx.shadowColor = "#aabaff";
+                ctx.shadowBlur = 16;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                b.y -= b.speed;
+                b.x += b.dx;
+                if (b.y + b.r < 0) {
+                    b.y = canvas.height + b.r;
+                    b.x = randomBetween(0, canvas.width);
+                }
+                if (b.x - b.r > canvas.width) b.x = -b.r;
+                if (b.x + b.r < 0) b.x = canvas.width + b.r;
+            }
+            requestAnimationFrame(drawBubbles);
+        }
+        drawBubbles();
+
+        // Particle cursor trail
+        const particles = [];
+        document.addEventListener('mousemove', e => {
+            for (let i = 0; i < 2; i++) {
+                particles.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    r: Math.random() * 6 + 2,
+                    alpha: 1,
+                    dx: (Math.random() - 0.5) * 2,
+                    dy: (Math.random() - 0.5) * 2,
+                    color: `rgba(118,75,162,0.7)`
+                });
+            }
+        });
+        function drawParticles() {
+            ctx.save();
+            for (let i = particles.length - 1; i >= 0; i--) {
+                let p = particles[i];
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color.replace('0.7', p.alpha.toFixed(2));
+                ctx.fill();
+                p.x += p.dx;
+                p.y += p.dy;
+                p.alpha -= 0.02;
+                if (p.alpha <= 0) particles.splice(i, 1);
+            }
+            ctx.restore();
+            requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+
+        // Pop-in animation on load
+        document.querySelectorAll('nav, section').forEach((el, i) => {
+            el.style.opacity = 0;
+            setTimeout(() => {
+                el.style.opacity = 1;
+                el.style.animation = 'popIn 0.8s cubic-bezier(.68,-0.55,.27,1.55) both';
+                el.style.animationDelay = (0.1 + i * 0.1) + 's';
+            }, 100);
+        });
+
+        // Typing effect for intro
+        const typewriter = document.querySelector('.typewriter');
+        const typeText = "Welcome, I am Wilson! 👋";
+        let idx = 0;
+        function type() {
+            if (idx <= typeText.length) {
+                typewriter.textContent = typeText.slice(0, idx++);
+                setTimeout(type, 60);
+            }
+        }
+        type();
+
+        // Smooth scroll for nav
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Theme toggle (dark/light)
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            themeIcon.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.parallax').forEach((el, i) => {
+                const speed = 0.2 + i * 0.05;
+                el.style.transform = `translateY(${window.scrollY * speed}px)`;
+            });
+        });
+
+        // Contact form fake submit
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for reaching out! 🚀');
+            this.reset();
+        });
+
+        // 3D tilt effect for profile card
+        const card = document.querySelector('.profile-card');
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width/2;
+            const y = e.clientY - rect.top - rect.height/2;
+            card.style.transform = `rotateY(${x/20}deg) rotateX(${-y/20}deg) scale(1.04)`;
+            card.classList.add('tilted');
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+            card.classList.remove('tilted');
+        });
+
+        // Voice greeting (AI voice intro)
+        window.addEventListener('DOMContentLoaded', () => {
+            if ('speechSynthesis' in window) {
+                const utter = new SpeechSynthesisUtterance("Welcome, I am Wilson! This is my interactive About Me website.");
+                utter.rate = 1.05;
+                utter.pitch = 1.1;
+                utter.volume = 0.7;
+                utter.lang = "en-US";
+                setTimeout(() => window.speechSynthesis.speak(utter), 1200);
+            }
+        });
+
+        // Dynamic accent color picker (live preview)
+        const accentPicker = document.getElementById('accent-picker');
+        accentPicker.value = '#764ba2';
+        accentPicker.addEventListener('input', e => {
+            document.documentElement.style.setProperty('--accent', e.target.value);
+            document.documentElement.style.setProperty('--accent2', e.target.value);
+        });
+    </script>
+    <style>
+        :root {
+            --glass-bg: rgba(255,255,255,0.85);
+            --glass-bg-dark: rgba(30,34,54,0.85);
+            --accent: #764ba2;
+            --accent2: #667eea;
+            --shadow: 0 8px 32px rgba(76, 68, 182, 0.12);
+            --shadow-neon: 0 0 16px #764ba2, 0 0 32px #667eea;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            transition: background 0.4s;
+        }
+        body.dark {
+            background: linear-gradient(135deg, #23243a 0%, #3a2e5c 100%);
+        }
+        #bubbles-bg {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        nav, section, footer, #theme-toggle {
+            position: relative;
+            z-index: 1;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--glass-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            z-index: 100;
+            border-radius: 0 0 18px 18px;
+            backdrop-filter: blur(8px);
+            margin-bottom: 18px;
+        }
+        body.dark nav {
+            background: var(--glass-bg-dark);
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 16px 0;
+            display: block;
+            transition: color 0.2s;
+        }
+        nav ul li a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 8px #fff, 0 0 16px var(--accent2);
+        }
+        body.dark nav ul li a {
+            color: #eee;
+        }
+        nav ul li a:focus, button:focus, input:focus, textarea:focus {
+            outline: 2px solid var(--accent2);
+            outline-offset: 2px;
+            background: #f3f3ff;
+        }
+        .glass {
+            background: var(--glass-bg);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            margin: 40px auto;
+            max-width: 700px;
+            padding: 40px 32px;
+            transition: background 0.4s, box-shadow 0.2s, transform 0.2s;
+        }
+        body.dark .glass {
+            background: var(--glass-bg-dark);
+            box-shadow: 0 8px 32px rgba(76, 68, 182, 0.22);
+        }
+        .glass:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: var(--shadow-neon);
+        }
+        h1, h2 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: var(--accent);
+            margin-top: 0;
+        }
+        body.dark h1, body.dark h2 {
+            color: #aabaff;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .intro {
+            font-size: 1.2rem;
+            color: #444;
+        }
+        body.dark .intro, body.dark p, body.dark li, body.dark span {
+            color: #eee;
+        }
+        p, li, span {
+            color: #555;
+            line-height: 1.7;
+        }
+        .profile-card {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 18px;
+            perspective: 800px;
+            transition: transform 0.3s cubic-bezier(.25,.8,.25,1);
+            will-change: transform;
+        }
+        .profile-card:hover {
+            transform: rotateY(12deg) scale(1.04) translateY(-6px);
+            box-shadow: 0 8px 32px 0 var(--accent2), 0 0 32px var(--accent);
+        }
+        .profile-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid var(--accent2);
+            box-shadow: 0 0 24px var(--accent2);
+            object-fit: cover;
+            background: #fff;
+        }
+        .typewriter {
+            font-size: 2rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid var(--accent2);
+            animation: blink-caret 0.8s step-end infinite;
+        }
+        @keyframes blink-caret {
+            0%, 100% { border-color: var(--accent2);}
+            50% { border-color: transparent;}
+        }
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-left: 12px;
+        }
+        .social-links a img {
+            width: 28px;
+            height: 28px;
+            filter: grayscale(0.2) brightness(1.2);
+            transition: filter 0.2s, transform 0.2s;
+        }
+        .social-links a:hover img {
+            filter: drop-shadow(0 0 8px var(--accent2)) brightness(1.5);
+            transform: scale(1.15) rotate(-8deg);
+        }
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .timeline li {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .timeline span {
+            min-width: 80px;
+            font-weight: bold;
+            color: var(--accent2);
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            font-family: inherit;
+            background: rgba(255,255,255,0.7);
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border: 1.5px solid var(--accent2);
+            box-shadow: 0 0 8px var(--accent2);
+            outline: none;
+        }
+        .contact-form button {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(76, 68, 182, 0.12);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .contact-form button:hover {
+            background: linear-gradient(90deg, var(--accent2), var(--accent));
+            transform: scale(1.05);
+        }
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: transparent;
+            color: #fff;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-top: 40px;
+            text-shadow: 0 0 8px #764ba2;
+        }
+        #theme-toggle {
+            position: fixed;
+            top: 32px;
+            right: 40px;
+            background: var(--glass-bg);
+            border: 2px solid var(--accent2);
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            font-size: 2.2rem;
+            color: var(--accent2);
+            cursor: pointer;
+            box-shadow: 0 0 24px 4px var(--accent2), 0 0 0 8px rgba(255,255,255,0.12);
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, border 0.3s, color 0.3s, box-shadow 0.3s, filter 0.3s;
+            filter: drop-shadow(0 0 16px var(--accent2));
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 24px 4px var(--accent2), 0 0 0 8px rgba(255,255,255,0.12);}
+            100% { box-shadow: 0 0 48px 12px var(--accent2), 0 0 0 16px rgba(255,255,255,0.18);}
+        }
+        body.dark #theme-toggle {
+            background: var(--glass-bg-dark);
+            border: 2px solid #aabaff;
+            color: #aabaff;
+            box-shadow: 0 0 32px 8px #23243a, 0 0 0 8px var(--accent2);
+        }
+        #theme-toggle:hover, #theme-toggle:focus {
+            background: var(--accent2);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 0 48px 16px var(--accent2), 0 0 0 12px #fff3;
+            outline: none;
+            filter: brightness(1.2) drop-shadow(0 0 24px var(--accent));
+        }
+        @media (max-width: 600px) {
+            #theme-toggle {
+                top: 12px;
+                right: 12px;
+                width: 44px;
+                height: 44px;
+                font-size: 1.3rem;
+            }
+        }
+        /* Neon focus for accessibility */
+        nav ul li a:focus, button:focus, input:focus, textarea:focus {
+            outline: 2.5px solid var(--accent2);
+            outline-offset: 2px;
+            background: #f3f3ff;
+            box-shadow: 0 0 16px var(--accent2), 0 0 8px #fff;
+        }
+        /* Glass reflection effect */
+        .glass::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 18%;
+            background: linear-gradient(120deg,rgba(255,255,255,0.25) 0%,rgba(255,255,255,0.02) 100%);
+            border-radius: 18px 18px 0 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .glass {
+            position: relative;
+            overflow: hidden;
+        }
+        /* 3D tilt effect for cards */
+        .profile-card {
+            transition: transform 0.2s cubic-bezier(.25,.8,.25,1), box-shadow 0.2s;
+            will-change: transform;
+        }
+        .profile-card.tilted {
+            box-shadow: 0 16px 48px 0 var(--accent2), 0 0 64px var(--accent);
+        }
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(40px);
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1.05) translateY(-8px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        @media (max-width: 800px) {
+            .glass {
+                max-width: 95vw;
+                padding: 24px 8vw;
+            }
+            nav ul li {
+                margin: 0 10px;
+            }
+            .profile-card {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+        }
+        @media (max-width: 500px) {
+            h1, .typewriter {
+                font-size: 1.3rem;
+            }
+            .glass {
+                padding: 16px 2vw;
+            }
+            #theme-toggle {
+                top: 8px;
+                right: 8px;
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</body>
+</html>
